@@ -1,16 +1,1 @@
-# Core for web.
-django==4.2.4
-# For generate data
-faker==19.2.0
-# [code_style]-[BEGIN]
-# Pre-commit hook.
-pre-commit==3.3.3
-# Upgrade syntax.
-pyupgrade==3.10.1
-# Formatter. Apply codestyle.
-black==23.7.0
-# Check codestyle.
-flake8==6.1.0
-# Removes unused imports and unused variables.
-autoflake==2.2.0
-# [code_style]-[END]
+--requirement requirements/production.txt

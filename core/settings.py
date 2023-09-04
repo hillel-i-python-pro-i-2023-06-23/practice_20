@@ -9,28 +9,41 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import string
 from pathlib import Path
+
+import environ
+from django.utils.crypto import get_random_string
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 APPS_DIR = BASE_DIR.joinpath("apps")
 
+env = environ.FileAwareEnv()
+env.read_env(BASE_DIR.joinpath(".env"))
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-9mxyn9i--yy__(y^bl!o5c80@)x#017rkv!e4*3m_$nq3%&ll)"
+SECRET_KEY = env.str(
+    "DJANGO__SECRET_KEY",
+    get_random_string(64, "".join([string.ascii_letters, string.digits, string.punctuation])),
+)
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DJANGO__DEBUG", False)
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "0.0.0.0",
-]
-
+ALLOWED_HOSTS = env.list("DJANGO__ALLOWED_HOSTS", default=[])
+if DEBUG:
+    ALLOWED_HOSTS.extend(
+        [
+            "localhost",
+            "127.0.0.1",
+            "0.0.0.0",
+        ]
+    )
 
 # Application definition
 
@@ -82,7 +95,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "core.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -92,7 +104,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db" / "db.sqlite3",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -112,7 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -123,7 +133,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

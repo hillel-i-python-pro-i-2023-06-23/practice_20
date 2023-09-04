@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # [bash_init]-[BEGIN]
 # Exit whenever it encounters an error, also known as a non–zero exit code.
@@ -12,8 +12,13 @@ set -o nounset
 set -o xtrace
 # [bash_init]-[END]
 
+# [init]-[BEGIN]
+# Create migrations to database if it's not already done
+make migrations
+
 # Apply database migrations.
 make migrate
+# [init]-[END]
 
 # Run application.
 python manage.py runserver 0.0.0.0:8000

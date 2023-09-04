@@ -1,0 +1,2 @@
+# Requirements for production
+--requirement base.txt

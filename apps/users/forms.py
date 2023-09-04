@@ -1,11 +1,11 @@
 from django import forms
 
-from apps.users.models import User
 
-
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        widgets = {
-            'password': forms.PasswordInput(),
-        }
+class GenerateForm(forms.Form):
+    amount = forms.IntegerField(
+        label="Amount",
+        min_value=1,
+        max_value=100,
+        required=True,
+        initial=12,
+    )

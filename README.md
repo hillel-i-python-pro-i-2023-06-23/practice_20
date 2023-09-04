@@ -1,7 +1,7 @@
 # Django application
 
 ---
-[![Main workflow](https://github.com/hillel-i-python-pro-i-2023-06-23/homework_11__yevhen__yalovenko/actions/workflows/main-workflow.yml/badge.svg)](https://github.com/hillel-i-python-pro-i-2023-06-23/homework_11__yevhen__yalovenko/actions/workflows/main-workflow.yml)
+[![Main workflow](https://github.com/hillel-i-python-pro-i-2023-06-23/Django_base_project_YY/actions/workflows/main-workflow.yml/badge.svg)](https://github.com/hillel-i-python-pro-i-2023-06-23/Django_base_project_YY/actions/workflows/main-workflow.yml)
 ## 🏠 Django project
 
 Base project
@@ -11,7 +11,7 @@ Base project
 Make all actions needed for run homework from zero. Including configuration.
 
 ```shell
-make django-project-run
+make d-homework-i-run
 ```
 
 ### 🚮 Purge
@@ -19,7 +19,7 @@ make django-project-run
 Make all actions needed for run homework from zero.
 
 ```shell
-make django-project-purge
+make d-homework-i-purge
 ```
 
 ---
@@ -52,6 +52,12 @@ Migrate
 
 ```shell
 make migrate
+```
+
+Create Admin
+
+```shell
+make create-admin
 ```
 ---
 
