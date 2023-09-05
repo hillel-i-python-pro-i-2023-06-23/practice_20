@@ -6,6 +6,8 @@
     <a href="{% url 'base:home_page' %}"> Home </a>
     <a href="{% url 'base:about' %}"> About Us </a>
     <a href="{% url 'users:user_list' %}"> Our Members</a>
+    <a href="{% url 'tracker:register' %}"> Registration </a>
+    <a href="{% url 'tracker:login' %}"> Login </a>
     {% if user.is_superuser %}
         <a href="{% url 'admin:index' %}"> Admin </a>
     {% endif %}

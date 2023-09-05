@@ -24,7 +24,7 @@ env = environ.FileAwareEnv()
 env.read_env(BASE_DIR.joinpath(".env"))
 
 
-AUTH_USER_MODEL = 'tracker.User'
+AUTH_USER_MODEL = "tracker.User"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -60,10 +60,7 @@ DJANGO_APPS = [
     "django.contrib.postgres",
 ]
 
-LOCAL_APPS = [
-    "apps.base",
-    "apps.users",
-]
+LOCAL_APPS = ["apps.base", "apps.users", "apps.tracker"]
 
 THIRD_PARTY_APPS = []
 
