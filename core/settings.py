@@ -57,10 +57,7 @@ DJANGO_APPS = [
     "django.contrib.postgres",
 ]
 
-LOCAL_APPS = [
-    "apps.base",
-    "apps.users",
-]
+LOCAL_APPS = ["apps.base", "apps.users", "apps.tracker"]
 
 THIRD_PARTY_APPS = []
 
