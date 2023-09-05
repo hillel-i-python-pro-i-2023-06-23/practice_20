@@ -23,6 +23,9 @@ APPS_DIR = BASE_DIR.joinpath("apps")
 env = environ.FileAwareEnv()
 env.read_env(BASE_DIR.joinpath(".env"))
 
+
+AUTH_USER_MODEL = 'tracker.User'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
