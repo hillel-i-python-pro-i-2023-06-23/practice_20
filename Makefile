@@ -21,13 +21,19 @@ init-configs:
 # Just run
 d-run:
 	@COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 \
-		docker compose up --build
+		COMPOSE_PROFILES=outside_dev \
+		docker compose \
+			up --build
 
-.PHONY: d-stop
-# Stop services
-d-stop:
+
+.PHONY: d-run-i-local-dev
+# Just run
+d-run-i-local-dev:
 	@COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 \
-		docker compose down
+		COMPOSE_PROFILES=local_dev \
+		docker compose \
+			up --build
+
 
 .PHONY: d-purge
 # Purge all data related with services
@@ -78,3 +84,8 @@ migrate:
 # Create admin
 create-admin:
 	@python manage.py create_admin
+
+.PHONY: generate-users
+# Generate data for apps
+generate-users:
+	@python manage.py generate_users
