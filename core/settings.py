@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import string
 from pathlib import Path
 
+# noinspection PyPackageRequirements
 import environ
 from django.utils.crypto import get_random_string
 
@@ -30,7 +31,6 @@ SECRET_KEY = env.str(
     "DJANGO__SECRET_KEY",
     get_random_string(64, "".join([string.ascii_letters, string.digits, string.punctuation])),
 )
-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO__DEBUG", False)
@@ -54,6 +54,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.postgres",
 ]
 
 LOCAL_APPS = [
@@ -99,10 +100,17 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db" / "db.sqlite3",
-    }
+    "default": env.db_url_config(
+        # Можливий варіант для sqlite
+        # f'sqlite:///{BASE_DIR.joinpath("db", "db.sqlite3")}'
+        # postgres://user:password@host:port/dbname
+        # Варіант для postgres з використанням змінних оточення
+        env.str(
+            "DJANGO__DB_URL",
+            f'postgres://{env.str("POSTGRES_USER")}:{env.str("POSTGRES_PASSWORD")}'
+            f'@{env.str("POSTGRES_HOST")}:{env.str("POSTGRES_PORT")}/{env.str("POSTGRES_DB")}',
+        )
+    )
 }
 
 # Password validation

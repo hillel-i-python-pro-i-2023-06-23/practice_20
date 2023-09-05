@@ -13,11 +13,14 @@ set -o xtrace
 # [bash_init]-[END]
 
 # [init]-[BEGIN]
-# Create migrations to database if it's not already done
-make migrations
-
 # Apply database migrations.
 make migrate
+
+# Create default superuser
+make create-admin
+
+# Generate data for apps
+
 # [init]-[END]
 
 # Run application.
