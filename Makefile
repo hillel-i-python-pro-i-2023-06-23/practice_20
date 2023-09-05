@@ -52,7 +52,9 @@ init-dev:
 .PHONY: homework-i-run
 # Run homework.
 homework-i-run:
-	@python manage.py runserver 0.0.0.0:8000
+	@make migrate && \
+	@python manage.py runserver localhost:8000
+
 
 .PHONY: homework-i-purge
 homework-i-purge:
