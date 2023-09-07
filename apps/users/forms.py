@@ -1,11 +1,12 @@
-from django import forms
+from django.contrib.auth import forms
+
+from apps.users.models import User
 
 
-class GenerateForm(forms.Form):
-    amount = forms.IntegerField(
-        label="Amount",
-        min_value=1,
-        max_value=100,
-        required=True,
-        initial=12,
-    )
+class UserForm(forms.UserCreationForm):
+    class Meta:
+        model = User
+        fields = (
+            "username",
+            "email",
+        )

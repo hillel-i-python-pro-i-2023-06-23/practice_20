@@ -24,7 +24,7 @@ env = environ.FileAwareEnv()
 env.read_env(BASE_DIR.joinpath(".env"))
 
 
-AUTH_USER_MODEL = "tracker.User"
+AUTH_USER_MODEL = "users.User"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -77,6 +77,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "core.urls"
+LOGOUT_REDIRECT_URL = "base:home_page"
 
 TEMPLATES = [
     {
@@ -101,10 +102,6 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     "default": env.db_url_config(
-        # Можливий варіант для sqlite
-        # f'sqlite:///{BASE_DIR.joinpath("db", "db.sqlite3")}'
-        # postgres://user:password@host:port/dbname
-        # Варіант для postgres з використанням змінних оточення
         env.str(
             "DJANGO__DB_URL",
             f'postgres://{env.str("POSTGRES_USER")}:{env.str("POSTGRES_PASSWORD")}'
