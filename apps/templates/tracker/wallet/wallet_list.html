@@ -1,0 +1,15 @@
+{% extends "_helpers/_base.html" %}
+
+{% block content %}
+    <div style="display: flex; align-items: center;">
+        <h1 style="margin-right: 20px;">Список гаманців /</h1>
+        <h1><a href="{% url 'tracker:wallet_create' %}" style="color: black">Створити новий гаманець</a></h1>
+    </div>
+
+    <ul>
+        {% for wallet in wallets %}
+            <li><a href="{% url 'tracker:wallet_detail' wallet.id %}">{{ wallet.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

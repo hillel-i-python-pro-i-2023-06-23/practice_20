@@ -1,0 +1,6 @@
+{% extends "_helpers/_base.html" %}
+
+{% block content %}
+    <h1>Деталі гаманця "{{ wallet.name }}"</h1>
+    <p>Баланс: {{ wallet.balance }} {{ wallet.currency }}</p>
+{% endblock %}
