@@ -1,5 +1,9 @@
 # Core for web.
 django==4.2.5
+
+#For requests
+requests==2.31
+
 # For generate data
 faker==19.5.0
 # For environment variables and configuration.
