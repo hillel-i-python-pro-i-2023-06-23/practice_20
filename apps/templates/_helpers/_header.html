@@ -57,15 +57,15 @@
         </div>
         <div class="navbar-right">
             {% if user.is_authenticated %}
-                <p style="color: white; font-weight: bold; font-size: 16px;">
-                    Authenticated as {{ user.username }}</p>
+                <p style="color: #d0cd0f; font-weight: bold; font-size: 16px;">
+                    Authenticated as {{ user.username.capitalize }}</p>
                 <a href="{% url 'tracker:logout' %}" class="logout-button"> Logout </a>
             {% else %}
                 <a href="{% url 'tracker:register' %}"> Registration </a>
                 <a href="{% url 'tracker:login' %}"> Login </a>
             {% endif %}
             {% if user.is_superuser %}
-                <a href="{% url 'admin:index' %}"> Admin </a>
+                <a href="{% url 'admin:index' %}"> Admin panel </a>
             {% endif %}
         </div>
     </div>

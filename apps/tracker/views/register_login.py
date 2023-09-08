@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from apps.users.forms import UserForm
 
 
-def register(request):
+def register_view(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
