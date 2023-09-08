@@ -1,12 +1,72 @@
-<header>
-    <h1>Django base project</h1>
-</header>
+<style>
+    nav {
+        background-color: #444;
+        padding: 10px 0;
+    }
 
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-left a {
+        color: #fff;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+
+    .navbar-left a:hover {
+        background-color: #555;
+    }
+
+    .navbar-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-right a {
+        color: #fff;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+
+    .navbar-right a:hover {
+        background-color: #555;
+    }
+
+    .logout-button {
+        color: white;
+        text-decoration: none;
+    }
+</style>
+
+<header>
+    <h1> Django financial tracker </h1>
+</header>
 <nav>
-    <a href="{% url 'base:home_page' %}"> Home </a>
-    <a href="{% url 'base:about' %}"> About Us </a>
-    <a href="{% url 'users:user_list' %}"> Our Members</a>
-    {% if user.is_superuser %}
-        <a href="{% url 'admin:index' %}"> Admin </a>
-    {% endif %}
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="{% url 'base:home_page' %}"> Home </a>
+            <a href="{% url 'base:about' %}"> About Us </a>
+        </div>
+        <div class="navbar-right">
+            {% if user.is_authenticated %}
+                <p style="color: #d0cd0f; font-weight: bold; font-size: 16px;">
+                    Authenticated as {{ user.username.capitalize }}</p>
+                <a href="{% url 'tracker:logout' %}" class="logout-button"> Logout </a>
+            {% else %}
+                <a href="{% url 'tracker:register' %}"> Registration </a>
+                <a href="{% url 'tracker:login' %}"> Login </a>
+            {% endif %}
+            {% if user.is_superuser %}
+                <a href="{% url 'admin:index' %}"> Admin panel </a>
+            {% endif %}
+        </div>
+    </div>
 </nav>
