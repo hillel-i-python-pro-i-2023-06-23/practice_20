@@ -1,0 +1,14 @@
+{% extends "_helpers/_base.html" %}
+
+{% block content %}
+   <h2>Currency converter</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Convert</button>
+    </form>
+        {% if converted_amount is not None %}
+        <p>Converted value: {{ amount }} {{ from_currency }} = {{ converted_amount }} {{ to_currency }}</p>
+    {% endif %}
+{% endblock %}

@@ -1,11 +1,11 @@
 {% extends "_helpers/_base.html" %}
 
 {% block content %}
-   <h2>Вхід</h2>
+   <h2>Enter</h2>
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Увійти</button>
+        <button type="submit">Login</button>
     </form>
 {% endblock %}
