@@ -1,11 +1,11 @@
 {% extends "_helpers/_base.html" %}
 
 {% block content %}
-   <h2>Створення гаманця</h2>
+   <h2>Create wallet</h2>
 
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Створити гаманець</button>
+    <button type="submit">Create wallet</button>
 </form>
 {% endblock %}

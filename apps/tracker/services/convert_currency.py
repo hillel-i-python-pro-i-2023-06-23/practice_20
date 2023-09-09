@@ -19,6 +19,8 @@ def get_currency_rates(from_currency, to_currency, exchange_data):
 
     if from_currency == "UAH":
         from_rate = 1
+    if to_currency == "UAH":
+        to_rate = 1
 
     for currency in exchange_data:
         if currency["cc"] == from_currency and from_rate is None:
