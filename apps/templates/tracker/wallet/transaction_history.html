@@ -1,0 +1,13 @@
+{% extends "_helpers/_base.html" %}
+
+{% block content %}
+    <h2>Transaction history from wallet "{{ wallet.name }}"</h2>
+    <ul>
+        {% for transaction in transactions %}
+            <li>{{ transaction.date }}: {{ transaction.description }} - {{ transaction.amount }}</li>
+        {% empty %}
+            <li>No transaction from this wallet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'tracker:wallet_detail' wallet.id %}">Back to wallet</a>
+{% endblock %}

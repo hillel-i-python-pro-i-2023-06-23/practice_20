@@ -19,7 +19,9 @@ make migrate
 # Create default superuser
 make create-admin
 
-# Generate data for apps
+# Create currency for users wallet
+python manage.py initialise_currency
+
 
 # [init]-[END]
 

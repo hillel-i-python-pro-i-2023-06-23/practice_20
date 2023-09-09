@@ -66,11 +66,12 @@ def convert_currency(amount, from_currency, to_currency):
 
 
 # if __name__ == "__main__":
-#     amount_in_usd = 100  # Amount in USD
-#     new_currency = 'EUR'  # New currency
+#     amount = 100  # Amount in USD
+#     from_currency = 'UAH'
+#     new_currency = 'USD'  # New currency
 #
-#     converted_amount = convert_currency(amount_in_usd, 'USD', new_currency)
+#     converted_amount = convert_currency(amount, from_currency, new_currency)
 #     if converted_amount is not None:
-#         print(f'{amount_in_usd} USD equals {converted_amount} {new_currency}')
+#         print(f'{amount} {from_currency} equals {converted_amount} {new_currency}')
 #     else:
 #         print('Conversion failed.')

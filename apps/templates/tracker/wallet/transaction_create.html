@@ -1,0 +1,17 @@
+{% extends "_helpers/_base.html" %}
+
+{% block content %}
+    <h1>Create transaction from wallet "{{ wallet.name }}"</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create</button>
+    </form>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

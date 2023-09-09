@@ -1,6 +1,37 @@
 {% extends "_helpers/_base.html" %}
 
 {% block content %}
-    <h1>Деталі гаманця "{{ wallet.name }}"</h1>
-    <p>Баланс: {{ wallet.balance }} {{ wallet.currency }}</p>
+    <h2>Wallet detail "{{ wallet.name }}"</h2>
+    <p>Balance: {{ wallet.balance }} {{ wallet.currency }}</p>
+    <a href="{% url 'tracker:create_transaction' wallet.id %}">Create transaction</a>
+    <a href="{% url 'tracker:transaction_history' wallet.id %}">Transaction history</a>
+
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" required>
+        <br>
+        <label for="from_currency">From currency:</label>
+        <select id="from_currency" name="from_currency" required>
+            {% for currency, rate in currency_rates %}
+                    <option value="{{ currency }}">{{ currency }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="to_currency">To currency:</label>
+        <select id="to_currency" name="to_currency" required>
+            {% for currency, rate in currency_rates %}
+                {% if currency != wallet.currency %}
+                    <option value="{{ currency }}">{{ currency }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Convert</button>
+    </form>
+
+    {% if converted_amount is not None %}
+        <p>Converted value: {{ amount }} {{ from_currency }} = {{ converted_amount }} {{ to_currency }}</p>
+    {% endif %}
 {% endblock %}

@@ -43,11 +43,12 @@ d-purge:
 
 
 .PHONY: init-dev
-# Init environment for development
+# Init environment for development. First use d-run-i-local-dev
 init-dev:
 	@pip install --upgrade pip && \
 	pip install --requirement requirements/local.txt && \
-	pre-commit install
+	pre-commit install && \
+	@python manage.py initialise_currency
 
 .PHONY: homework-i-run
 # Run homework.
