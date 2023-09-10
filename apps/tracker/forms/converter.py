@@ -4,7 +4,7 @@ from apps.tracker.services.convert_currency import get_exchange_data, convert_cu
 
 
 class CurrencyConversionForm(forms.Form):
-    amount = forms.DecimalField(label="Amount", max_digits=10, decimal_places=2, min_value=1)
+    amount = forms.DecimalField(label="Amount", max_digits=15, decimal_places=2, min_value=1)
     from_currency = forms.ChoiceField(label="From currency", choices=[], initial="UAH")
     to_currency = forms.ChoiceField(label="To currency", choices=[], initial="USD")
 
@@ -17,11 +17,12 @@ class CurrencyConversionForm(forms.Form):
         for currency in exchange_data:
             currency_rates.append((currency["cc"], currency["cc"]))
         if not any(currency["cc"] == "UAH" for currency in exchange_data):
-            # Add UAH with a fixed rate (you can change it to a dynamic one if you want)
+            # Add UAH with a fixed rate
             currency_rates.append(("UAH", "UAH"))
         # Set the choices for the currency fields
         self.fields["from_currency"].choices = currency_rates
         self.fields["to_currency"].choices = currency_rates
+        self.fields["amount"].widget.attrs.update({"class": "form-input"})
 
     def clean(self):
         # Get the cleaned data from the form
