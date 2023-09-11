@@ -2,71 +2,77 @@
 
 {% block content %}
     <style>
-    h2 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin: 20px 0;
-    }
-button[type="submit"],
-button[type="button"] {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-button[type="submit"]:hover,
-button[type="button"]:hover {
-    background-color: #0056b3;
-}
-.converted-value {
-    font-size: 18px;
-    font-weight: bold;
-    color: #44c917;
-    margin-top: 10px;
-}
-.form-field {
-    margin-bottom: 10px;
-}
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+        }
 
-.form-label {
-    font-weight: bold;
-    margin-right: 10px;
-}
+        button[type="submit"],
+        button[type="reset"] {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.form-input {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+        button[type="submit"]:hover,
+        button[type="reset"]:hover {
+            background-color: #0056b3;
+        }
 
-</style>
+        .converted-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #44c917;
+            margin-top: 10px;
+        }
+
+        .form-field {
+            margin-bottom: 10px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .form-input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+    </style>
+
     <h2>Currency converter</h2>
 
     <form method="post">
         {% csrf_token %}
-    <div class="form-field">
-        <label for="{{ form.amount.id }}" class="form-label">Amount:</label>
-        {{ form.amount }}
-    </div>
-    <div class="form-field">
-        <label for="{{ form.from_currency.id }}" class="form-label">From currency:</label>
-        {{ form.from_currency }}
-    </div>
-    <div class="form-field">
-        <label for="{{ form.to_currency.id }}" class="form-label">To currency:</label>
-        {{ form.to_currency }}
-    </div>
+        <div class="form-field">
+            <label for="{{ form.amount.id }}" class="form-label">Amount:</label>
+            {{ form.amount }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.from_currency.id }}" class="form-label">From currency:</label>
+            {{ form.from_currency }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.to_currency.id }}" class="form-label">To currency:</label>
+            {{ form.to_currency }}
+        </div>
         <div>
-            <button type="submit">Convert</button>
-            <button type="button">Clear</button>
+            <button type="submit" name="convert">Convert</button>
+            <button type="submit" name="clear">Clear</button>
         </div>
 
     </form>
     {% if converted_amount is not None %}
-        <p class="converted-value">Converted value: {{ amount }} {{ from_currency }} = {{ converted_amount }} {{ to_currency }}</p>
+        <p class="converted-value">Converted value: {{ amount }} {{ from_currency }}
+            = {{ converted_amount }} {{ to_currency }}</p>
     {% endif %}
 {% endblock %}
