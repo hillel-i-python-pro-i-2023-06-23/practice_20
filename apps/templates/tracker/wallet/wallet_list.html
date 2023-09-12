@@ -15,10 +15,15 @@
     }
 
     .create-wallet-link {
-        color: #007BFF;
+        color: #548ab7;
         text-decoration: none;
         font-weight: bold;
         font-size: 20px;
+        transition: color 0.3s ease;
+    }
+    .create-wallet-link:hover {
+        color: #05bb3f;
+        text-decoration: underline;
     }
 
     .wallet-list {
@@ -30,17 +35,30 @@
         margin-bottom: 10px;
     }
 
-     .wallet-link {
-            text-decoration: none;
-            color: #cb4d0d;
-            font-weight: bold;
-        }
+    .wallet-link {
+        text-decoration: none;
+        color: #22b8cc;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+    .wallet-currency {
+        text-decoration: none;
+        color: #e7ce34;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
 
     .wallet-link:hover {
+        color: #e7ce34;
         text-decoration: underline;
     }
 
+    .wallet-currency:hover {
+        color: #22b8cc;
+        text-decoration: underline;
+    }
 </style>
+
     <div class="page-header">
         <h2>Wallet list</h2>
         <a href="{% url 'tracker:wallet_create' %}" class="create-wallet-link">Create new wallet</a>
@@ -48,7 +66,8 @@
 
     <ul class="wallet-list">
         {% for wallet in wallets %}
-            <li><a href="{% url 'tracker:wallet_detail' wallet.id %}" class="wallet-link">{{ wallet.name }}</a></li>
+            <li><a href="{% url 'tracker:wallet_detail' wallet.id %}" class="wallet-link">
+                {{ wallet.name }} <b class="wallet-currency" >{{ wallet.currency }}</b></a></li>
         {% endfor %}
     </ul>
 {% endblock %}

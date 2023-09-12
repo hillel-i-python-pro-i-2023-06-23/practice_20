@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from apps.tracker.services.initialise_currency import initialise_currency
+from apps.tracker.services.initialize_currency import initialise_currency
 
 
 class Command(BaseCommand):

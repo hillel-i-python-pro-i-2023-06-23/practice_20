@@ -1,11 +1,62 @@
 {% extends "_helpers/_base.html" %}
 
 {% block content %}
-   <h2>Create wallet</h2>
+    <style>
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+        }
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create wallet</button>
-</form>
+        .form-field {
+            margin-bottom: 10px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .form-input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <h2>Create wallet</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-field">
+            <label for="{{ form.name.id }}" class="form-label">Wallet Name:</label>
+            {{ form.name }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.balance.id }}" class="form-label">Balance:</label>
+            {{ form.balance }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.currency.id }}" class="form-label">Currency:</label>
+            {{ form.currency }}
+        </div>
+        <div>
+            <button type="submit">Create wallet</button>
+        </div>
+    </form>
 {% endblock %}
