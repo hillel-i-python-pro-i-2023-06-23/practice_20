@@ -1,14 +1,54 @@
 {% extends "_helpers/_base.html" %}
 
 {% block content %}
-    <div style="display: flex; align-items: center;">
-        <h2 style="margin-right: 20px;">Wallet list /</h2>
-        <h2><a href="{% url 'tracker:wallet_create' %}" style="color: black">Create new wallet</a></h2>
+    <style>
+    .page-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .page-header h2 {
+        margin-right: 20px;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .create-wallet-link {
+        color: #007BFF;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .wallet-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .wallet-list li {
+        margin-bottom: 10px;
+    }
+
+     .wallet-link {
+            text-decoration: none;
+            color: #cb4d0d;
+            font-weight: bold;
+        }
+
+    .wallet-link:hover {
+        text-decoration: underline;
+    }
+
+</style>
+    <div class="page-header">
+        <h2>Wallet list</h2>
+        <a href="{% url 'tracker:wallet_create' %}" class="create-wallet-link">Create new wallet</a>
     </div>
 
-    <ul>
+    <ul class="wallet-list">
         {% for wallet in wallets %}
-            <li><a href="{% url 'tracker:wallet_detail' wallet.id %}">{{ wallet.name }}</a></li>
+            <li><a href="{% url 'tracker:wallet_detail' wallet.id %}" class="wallet-link">{{ wallet.name }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}
