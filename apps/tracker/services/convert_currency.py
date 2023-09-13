@@ -1,15 +1,21 @@
 import requests
 
+from django.core.cache import cache
+
 
 def get_exchange_data():
     """Get exchange data from NBU website"""
-    # We request data on exchange rates from the NBU website
-    url = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json"
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()
+    exchange_data = cache.get("exchange_data")
 
-    return None
+    if exchange_data is None:
+        # We request data on exchange rates from the NBU website
+        url = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json"
+        response = requests.get(url)
+        if response.status_code == 200:
+            exchange_data = response.json()
+            cache.set("exchange_data", exchange_data, 60 * 60)
+
+    return exchange_data
 
 
 def get_currency_rates(from_currency, to_currency, exchange_data):
