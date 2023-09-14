@@ -1,7 +1,7 @@
 from apps.tracker.models import Currency
 
 
-def initialise_currency():
+def initialize_currency():
     currencys = [
         {"code": "UAH", "name": "hryvnia"},
         {"code": "USD", "name": "dollar"},

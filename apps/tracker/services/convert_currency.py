@@ -1,5 +1,4 @@
 import requests
-
 from django.core.cache import cache
 
 
@@ -16,6 +15,18 @@ def get_exchange_data():
             cache.set("exchange_data", exchange_data, 60 * 60)
 
     return exchange_data
+
+
+def get_currencys():
+    exchange_data = get_exchange_data()
+    # Create a list of currencies and their rates
+    currency_list = []
+    for currency in exchange_data:
+        currency_list.append((currency["cc"], currency["cc"]))
+    if not any(currency["cc"] == "UAH" for currency in exchange_data):
+        # Add UAH with a fixed rate
+        currency_list.append(("UAH", "UAH"))
+    return currency_list
 
 
 def get_currency_rates(from_currency, to_currency, exchange_data):
@@ -71,15 +82,3 @@ def convert_currency(amount, from_currency, to_currency):
             return None  # Currencies not found in data
     else:
         return None  # Request error
-
-
-# if __name__ == "__main__":
-#     amount = 100  # Amount in USD
-#     from_currency = 'UAH'
-#     new_currency = 'USD'  # New currency
-#
-#     converted_amount = convert_currency(amount, from_currency, new_currency)
-#     if converted_amount is not None:
-#         print(f'{amount} {from_currency} equals {converted_amount} {new_currency}')
-#     else:
-#         print('Conversion failed.')

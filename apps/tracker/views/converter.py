@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 
 from apps.tracker.forms.converter import CurrencyConversionForm
+from apps.tracker.services.convert_currency import convert_currency
 
 
 class CurrencyConversionView(FormView):
@@ -15,10 +16,10 @@ class CurrencyConversionView(FormView):
         # Call the base implementation first to get a context
         context = self.get_context_data()
         # Get the data from the form
-        amount = form.cleaned_data["amount"]
+        amount = float(form.cleaned_data["amount"])
         from_currency = form.cleaned_data["from_currency"]
         to_currency = form.cleaned_data["to_currency"]
-        converted_amount = form.cleaned_data["converted_amount"]
+        converted_amount = convert_currency(amount, from_currency, to_currency)
         # Add the data to the context
         context["amount"] = amount
         context["from_currency"] = from_currency
