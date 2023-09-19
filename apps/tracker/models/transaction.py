@@ -12,5 +12,3 @@ class Transaction(models.Model):
         blank=False,
         null=False,
     )
-
-    # type = models.IntegerField()
