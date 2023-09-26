@@ -1,7 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
-from apps.tracker.models.currency import Currency
-from apps.users.models import User
+from .currency import Currency
+
+User = get_user_model()
 
 
 class Wallet(models.Model):

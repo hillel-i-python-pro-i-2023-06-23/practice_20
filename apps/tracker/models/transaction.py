@@ -1,6 +1,7 @@
 from django.db import models
 
-from apps.tracker.models import Wallet
+from .wallet import Wallet
+from .transaction_type import TransactionType
 
 
 class Transaction(models.Model):
@@ -12,3 +13,6 @@ class Transaction(models.Model):
         blank=False,
         null=False,
     )
+
+    type = models.ForeignKey(TransactionType, on_delete=models.RESTRICT)
+
