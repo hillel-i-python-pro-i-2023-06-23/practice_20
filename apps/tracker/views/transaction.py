@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import redirect, render
 
 from apps.tracker.forms.transaction import TransactionForm
@@ -35,5 +36,31 @@ def create_transaction(request, wallet_id):
 @login_required()
 def transaction_history(request, wallet_id):
     wallet = Wallet.objects.get(id=wallet_id, user=request.user)
+
+    # Getting filter parameters
+    start_date = request.GET.get("start_date")
+    end_date = request.GET.get("end_date")
+    search = request.GET.get("search")
+
     transactions = Transaction.objects.filter(wallet=wallet).order_by("-date")
-    return render(request, "tracker/wallet/transaction_history.html", {"wallet": wallet, "transactions": transactions})
+
+    if start_date:
+        transactions = transactions.filter(date__gte=start_date)
+
+    if end_date:
+        transactions = transactions.filter(date__lte=end_date)
+
+    if search:
+        transactions = transactions.filter(Q(description__icontains=search) | Q(amount__icontains=search))
+
+    return render(
+        request,
+        "tracker/wallet/transaction_history.html",
+        {
+            "wallet": wallet,
+            "transactions": transactions,
+            "start_date": start_date,
+            "end_date": end_date,
+            "search": search,
+        },
+    )

@@ -23,7 +23,6 @@ APPS_DIR = BASE_DIR.joinpath("apps")
 env = environ.FileAwareEnv()
 env.read_env(BASE_DIR.joinpath(".env"))
 
-
 AUTH_USER_MODEL = "users.User"
 
 # Quick-start development settings - unsuitable for production
@@ -58,6 +57,7 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.postgres",
+    "bootstrap5",
 ]
 
 LOCAL_APPS = ["apps.base", "apps.users", "apps.tracker"]
