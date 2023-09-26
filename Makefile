@@ -48,8 +48,8 @@ init-dev:
 	@pip install --upgrade pip && \
 	pip install --requirement requirements/local.txt && \
 	pre-commit install && \
-	python manage.py initialize_currency && \
-	python manage.py create_cache_table
+	python manage.py initialize_currency
+
 
 .PHONY: homework-i-run
 # Run homework.

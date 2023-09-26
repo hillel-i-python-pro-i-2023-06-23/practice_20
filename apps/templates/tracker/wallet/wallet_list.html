@@ -1,74 +1,31 @@
 {% extends "_helpers/_base.html" %}
 
 {% block content %}
-    <style>
-    .page-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
+<div class="container-sm mt-4">
 
-    .page-header h2 {
-        margin-right: 20px;
-        font-size: 24px;
-        color: #333;
-    }
-
-    .create-wallet-link {
-        color: #548ab7;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 20px;
-        transition: color 0.3s ease;
-    }
-    .create-wallet-link:hover {
-        color: #05bb3f;
-        text-decoration: underline;
-    }
-
-    .wallet-list {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .wallet-list li {
-        margin-bottom: 10px;
-    }
-
-    .wallet-link {
-        text-decoration: none;
-        color: #22b8cc;
-        font-weight: bold;
-        transition: color 0.3s ease;
-    }
-    .wallet-currency {
-        text-decoration: none;
-        color: #e7ce34;
-        font-weight: bold;
-        transition: color 0.3s ease;
-    }
-
-    .wallet-link:hover {
-        color: #e7ce34;
-        text-decoration: underline;
-    }
-
-    .wallet-currency:hover {
-        color: #22b8cc;
-        text-decoration: underline;
-    }
-</style>
-
-    <div class="page-header">
-        <h2>Wallet list</h2>
-        <a href="{% url 'tracker:wallet_create' %}" class="create-wallet-link">Create new wallet</a>
+    <div class="mt-4">
+        <a href="{% url 'tracker:wallet_create' %}" class="create-wallet-link btn btn-success">Create new wallet</a>
     </div>
 
-    <ul class="wallet-list">
-        {% for wallet in wallets %}
-            <li><a href="{% url 'tracker:wallet_detail' wallet.id %}" class="wallet-link">
-                {{ wallet.name }} <b class="wallet-currency" >{{ wallet.currency }}</b></a></li>
-        {% endfor %}
-    </ul>
-{% endblock %}
+    <div class="mt-4">
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#walletList" aria-expanded="false" aria-controls="walletList">
+            Wallet List
+        </button>
+    </div>
 
+
+    <div class="collapse" id="walletList">
+        <ul class="list-group wallet-list">
+            {% for wallet in wallets %}
+                <li class="list-group-item">
+                    <a href="{% url 'tracker:wallet_detail' wallet.id %}" class="wallet-link">
+                        {{ wallet.name }}
+                        <span class="badge bg-warning wallet-currency">{{ wallet.currency }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+{% endblock %}

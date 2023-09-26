@@ -1,7 +1,8 @@
 from django.db import models
 
 from .wallet import Wallet
-from .transaction_type import TransactionType
+
+# from .transaction_type import TransactionType
 
 
 class Transaction(models.Model):
@@ -14,5 +15,4 @@ class Transaction(models.Model):
         null=False,
     )
 
-    type = models.ForeignKey(TransactionType, on_delete=models.RESTRICT)
-
+    # type = models.ForeignKey(TransactionType, on_delete=models.RESTRICT)

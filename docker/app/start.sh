@@ -14,13 +14,16 @@ set -o xtrace
 
 # [init]-[BEGIN]
 # Apply database migrations.
+
 make migrate
+
+python manage.py createcachetable
 
 # Create default superuser
 make create-admin
 
 # Create currency for users wallet
-python manage.py initialise_currency
+python manage.py initialize_currency
 
 
 # [init]-[END]
