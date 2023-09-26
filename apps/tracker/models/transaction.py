@@ -15,3 +15,4 @@ class Transaction(models.Model):
     )
 
     type = models.ForeignKey(TransactionType, on_delete=models.RESTRICT)
+

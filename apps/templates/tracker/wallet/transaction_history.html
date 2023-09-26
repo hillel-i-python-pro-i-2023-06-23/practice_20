@@ -2,6 +2,20 @@
 
 {% block content %}
     <h2>Transaction history from wallet "{{ wallet.name }}"</h2>
+
+    <form method="GET" action="{% url 'tracker:transaction_history' wallet.id %}">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" value="{{ start_date }}">
+
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" value="{{ end_date }}">
+
+        <label for="search">Search:</label>
+        <input type="text" id="search" name="search" value="{{ search|default:'' }}">
+
+        <button type="submit">Filter</button>
+    </form>
+
     <ul>
         {% for transaction in transactions %}
             <li>{{ transaction.date }}: {{ transaction.description }} - {{ transaction.amount }}</li>
