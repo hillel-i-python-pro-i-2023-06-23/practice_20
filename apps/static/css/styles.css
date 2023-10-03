@@ -132,3 +132,12 @@ button[type="submit"]:hover {
 .wallet-link {
     color: #ffffff;
 }
+
+.card.bg-transparent {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.text-2 {
+    font-size: 18px;
+    color: #ffffff;
+}

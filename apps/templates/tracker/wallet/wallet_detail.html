@@ -1,9 +1,17 @@
 {% extends "_helpers/_base.html" %}
 
 {% block content %}
-    <h2>Wallet detail "{{ wallet.name }}"</h2>
-    <p class="text">Balance: {{ wallet.balance }} {{ wallet.currency }}</p>
-    <a href="{% url 'tracker:create_transaction' wallet.id %}">Create transaction</a>
-    <a href="{% url 'tracker:transaction_history' wallet.id %}">Transaction history</a>
-
+<div class="container mt-4">
+    <div class="card bg-transparent">
+        <div class="card-body">
+            <h2 class="card-title">"{{ wallet.name }}"</h2>
+            <p class="text-2">Balance: {{ wallet.balance }} {{ wallet.currency }}</p>
+            <a href="{% url 'tracker:create_transaction' wallet.id %}" class="btn btn-primary">Create Transaction</a>
+            <a href="{% url 'tracker:transaction_history' wallet.id %}" class="btn btn-secondary">Transaction History</a>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'tracker:wallet_list' %}" class="btn btn-light">Back to Wallets</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
