@@ -3,20 +3,27 @@
 {% block content %}
     <h2>Transaction history from wallet "{{ wallet.name }}"</h2>
 
-    <form method="GET" action="{% url 'tracker:transaction_history' wallet.id %}">
-        <label for="start_date">Start Date:</label>
-        <input type="date" id="start_date" name="start_date" value="{{ start_date }}">
+<form class="text" method="GET" action="{% url 'tracker:transaction_history' wallet.id %}">
+    <div class="container-sm mb-2">
+         <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#hidden-fields">Search</button>
+        <div id="hidden-fields" class="collapse">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" value="{{ start_date }}">
 
-        <label for="end_date">End Date:</label>
-        <input type="date" id="end_date" name="end_date" value="{{ end_date }}">
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" value="{{ end_date }}">
 
-        <label for="search">Search:</label>
-        <input type="text" id="search" name="search" value="{{ search|default:'' }}">
+            <label for="search">Search:</label>
+            <input type="text" id="search" name="search" value="{{ search|default:'' }}">
 
-        <button type="submit">Filter</button>
-    </form>
+            <button type="submit">Filter</button>
+        </div>
+    </div>
 
-    <ul>
+</form>
+
+
+    <ul class="text">
         {% for transaction in transactions %}
             <li>{{ transaction.date }}: {{ transaction.description }} - {{ transaction.amount }}</li>
         {% empty %}

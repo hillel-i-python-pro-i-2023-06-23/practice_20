@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2>Wallet detail "{{ wallet.name }}"</h2>
-    <p>Balance: {{ wallet.balance }} {{ wallet.currency }}</p>
+    <p class="text">Balance: {{ wallet.balance }} {{ wallet.currency }}</p>
     <a href="{% url 'tracker:create_transaction' wallet.id %}">Create transaction</a>
     <a href="{% url 'tracker:transaction_history' wallet.id %}">Transaction history</a>
 

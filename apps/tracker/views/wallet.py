@@ -3,6 +3,7 @@ from django.views.generic import CreateView, ListView, DetailView
 
 from apps.tracker.forms.wallet import WalletForm
 from apps.tracker.models import Wallet
+from apps.tracker.services.calculate_total_balance_in_uah import calculate_total_balance_in_uah
 
 
 class WalletCreateView(CreateView):
@@ -24,6 +25,12 @@ class WalletListView(ListView):
 
     def get_queryset(self):
         return Wallet.objects.filter(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        total_balance_in_uah = calculate_total_balance_in_uah(self.request.user)
+        context["total_balance_in_uah"] = total_balance_in_uah
+        return context
 
 
 class WalletDetailView(DetailView):

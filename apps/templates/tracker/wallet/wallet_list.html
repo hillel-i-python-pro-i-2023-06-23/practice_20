@@ -1,31 +1,31 @@
 {% extends "_helpers/_base.html" %}
 
 {% block content %}
-<div class="container-sm mt-4">
+    <div class="container mt-2">
+        <div class="mb-4">
+            <button class="btn btn-primary me-2 btn-sm" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#walletList" aria-expanded="false" aria-controls="walletList">
+                Wallet List
+            </button>
+            <a href="{% url 'tracker:wallet_create' %}" class="create-wallet-link btn btn-success btn-sm">
+                Create new wallet
+            </a>
+        </div>
 
-    <div class="mt-4">
-        <a href="{% url 'tracker:wallet_create' %}" class="create-wallet-link btn btn-success">Create new wallet</a>
+        <div class="collapse" id="walletList">
+            <ul class="list-group wallet-list">
+                {% for wallet in wallets %}
+                    <li class="list-group-item list-group-item-action flex-column align-items-start">
+                        <a href="{% url 'tracker:wallet_detail' wallet.id %}" class="wallet-link">
+                            {{ wallet.name }}
+                            <span class="badge bg-warning wallet-currency">{{ wallet.currency }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            <br>
+                <p class="text">Total Balance in UAH: {{ total_balance_in_uah }}</p>
+            </ul>
+        </div>
+
     </div>
-
-    <div class="mt-4">
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#walletList" aria-expanded="false" aria-controls="walletList">
-            Wallet List
-        </button>
-    </div>
-
-
-    <div class="collapse" id="walletList">
-        <ul class="list-group wallet-list">
-            {% for wallet in wallets %}
-                <li class="list-group-item">
-                    <a href="{% url 'tracker:wallet_detail' wallet.id %}" class="wallet-link">
-                        {{ wallet.name }}
-                        <span class="badge bg-warning wallet-currency">{{ wallet.currency }}</span>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-
-</div>
 {% endblock %}

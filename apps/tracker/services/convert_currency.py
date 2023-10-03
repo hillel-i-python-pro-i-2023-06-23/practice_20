@@ -1,4 +1,5 @@
 import requests
+from decimal import Decimal
 from django.core.cache import cache
 
 
@@ -52,33 +53,26 @@ def get_currency_rates(from_currency, to_currency, exchange_data):
 
 
 def convert_currency(amount, from_currency, to_currency):
-    """
-    Convert currency amount
-
-    # Usage example:
-    amount_in_usd = 100  # Amount in USD
-    new_currency = 'EUR'  # New currency
-
-    converted_amount = convert_currency(amount_in_usd, 'USD', new_currency)
-    if converted_amount is not None:
-        print(f'{amount_in_usd} USD equals {converted_amount} {new_currency}')
-    else:
-    print('Conversion failed.')
-    """
-
     if from_currency == to_currency:
         return amount
 
     exchange_data = get_exchange_data()
 
     if exchange_data:
-        # We are looking for rates of the required currencies
         from_rate, to_rate = get_currency_rates(from_currency, to_currency, exchange_data)
 
         if from_rate is not None and to_rate is not None:
-            # Recalculate the amount
-            return round(amount * (from_rate / to_rate), 2)
+            # Transformation in decimal.Decimal
+            amount_decimal = Decimal(str(amount))
+            from_rate_decimal = Decimal(str(from_rate))
+            to_rate_decimal = Decimal(str(to_rate))
+
+            # Calculate
+            converted_amount = amount_decimal * (from_rate_decimal / to_rate_decimal)
+
+            # Return result in Decimal format
+            return round(converted_amount, 2)
         else:
-            return None  # Currencies not found in data
+            return None  # Not currency is found
     else:
-        return None  # Request error
+        return None  # Error
