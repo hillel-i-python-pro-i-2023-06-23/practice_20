@@ -1,11 +1,26 @@
 {% extends "_helpers/_base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
-    <h2>Registration</h2>
-
+<h2>Registration</h2>
     <form class="text" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                {{ form.username|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-5">
+                {{ form.email|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                {{ form.password1|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-5">
+                {{ form.password2|as_crispy_field }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
     </form>
 {% endblock %}

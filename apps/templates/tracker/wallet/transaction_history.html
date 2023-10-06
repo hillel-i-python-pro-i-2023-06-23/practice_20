@@ -1,5 +1,5 @@
 {% extends "_helpers/_base.html" %}
-
+{% load tz %}
 {% block content %}
     <h2>Transaction history from wallet "{{ wallet.name }}"</h2>
 
@@ -25,7 +25,9 @@
 
     <ul class="text">
         {% for transaction in transactions %}
-            <li>{{ transaction.date }}: {{ transaction.description }} - {{ transaction.amount }}</li>
+            <li>{{ transaction.date|timezone:"Europe/Kiev"|date:"d.m.Y" }}
+                {{ transaction.date|timezone:"Europe/Kiev"|time:"H:i" }}:
+                {{ transaction.description }} -{{ transaction.amount }} {{ wallet.currency }}</li>
         {% empty %}
             <li>No transaction from this wallet.</li>
         {% endfor %}

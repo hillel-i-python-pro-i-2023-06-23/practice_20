@@ -1,5 +1,5 @@
 # Core for web.
-django==4.2.5
+django==4.2.6
 
 #For requests
 requests==2.31
@@ -13,7 +13,15 @@ python-dotenv==1.0.0
 
 # For PostgreSQL.
 # psycopg2-binary==2.9.7 # Ще один можливий варіант
-psycopg[binary,pool]==3.1.10
+psycopg[binary,pool]==3.1.12
 
 # For styling
 django-bootstrap-v5==1.0.11
+
+# For timezone
+geoip2==4.7.0
+pytz==2023.3.post1
+
+# For visualisation
+django-crispy-forms==2.0
+crispy-bootstrap5==0.7

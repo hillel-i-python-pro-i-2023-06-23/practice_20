@@ -1,3 +1,4 @@
+# import geoip2.database
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -5,6 +6,9 @@ from django.shortcuts import redirect, render
 
 from apps.tracker.forms.transaction import TransactionForm
 from apps.tracker.models import Wallet, Transaction
+
+# from apps.tracker.services.timezone_check import get_timezone_by_city
+# from core.settings import GEOIP_DATABASE
 
 
 @login_required
@@ -36,6 +40,16 @@ def create_transaction(request, wallet_id):
 @login_required()
 def transaction_history(request, wallet_id):
     wallet = Wallet.objects.get(id=wallet_id, user=request.user)
+
+    # # checking user ID
+    # user_ip = request.META.get("REMOTE_ADDR")
+    #
+    # with geoip2.database.Reader(GEOIP_DATABASE.joinpath('GeoLite2-City.mmdb')) as reader:
+    #     response = reader.city(user_ip)
+    #
+    # user_timezone = get_timezone_by_city(response.city.name)
+    #
+    # request.session["user_timezone"] = user_timezone
 
     # Getting filter parameters
     start_date = request.GET.get("start_date")

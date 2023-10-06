@@ -58,6 +58,8 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.postgres",
     "bootstrap5",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 LOCAL_APPS = ["apps.base", "apps.users", "apps.tracker"]
@@ -94,6 +96,10 @@ TEMPLATES = [
         },
     },
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 WSGI_APPLICATION = "core.wsgi.application"
 
@@ -138,6 +144,7 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+GEOIP_DATABASE = BASE_DIR.joinpath("GeoIP2")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
