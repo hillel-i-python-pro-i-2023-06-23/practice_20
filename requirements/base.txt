@@ -25,3 +25,6 @@ pytz==2023.3.post1
 # For visualisation
 django-crispy-forms==2.0
 crispy-bootstrap5==0.7
+
+# Automatisation update echange rate
+celery==5.3.4

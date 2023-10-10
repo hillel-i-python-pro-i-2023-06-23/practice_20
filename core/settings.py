@@ -14,6 +14,7 @@ from pathlib import Path
 
 # noinspection PyPackageRequirements
 import environ
+from celery.schedules import crontab
 from django.utils.crypto import get_random_string
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -164,4 +165,21 @@ CACHES = {
         "BACKEND": "django.core.cache.backends.db.DatabaseCache",
         "LOCATION": "currency_exchange_cache_table",
     }
+}
+
+CELERY_BROKER_URL = env.str("CELERY_BROKER_URL")
+
+CELERY_BEAT_SCHEDULE = {
+    "test_task": {
+        "task": "apps.tracker.tasks.test.test_1",
+        "schedule": crontab(minute="*/1"),
+    },
+    "get-exchange-data-morning": {
+        "task": "apps.tracker.tasks.update_currency_exchange.update_currency_exchange",
+        "schedule": crontab(hour="9", minute="0"),
+    },
+    "get-exchange-data-evening": {
+        "task": "apps.tracker.tasks.update_currency_exchange.update_currency_exchange",
+        "schedule": crontab(hour="17", minute="0"),
+    },
 }
