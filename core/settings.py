@@ -168,6 +168,7 @@ CACHES = {
 }
 
 CELERY_BROKER_URL = env.str("CELERY_BROKER_URL")
+API_KEY = env.str("API_KEY")
 
 CELERY_BEAT_SCHEDULE = {
     "test_task": {

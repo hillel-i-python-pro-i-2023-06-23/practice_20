@@ -14,6 +14,7 @@ d-homework-i-purge:
 # Configuration files initialization
 init-configs:
 	@cp .env.homework .env &&\
+	python manage.py initialize_api_key &&\
 	cp docker-compose.override.dev.yml docker-compose.override.yml
 
 
